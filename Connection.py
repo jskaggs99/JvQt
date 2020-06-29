@@ -68,6 +68,7 @@ class Shutter(object):
 class Keithley(object):
     def __init__(self,cnt):
         self.inst = cnt.inst
+
     def inst_set_volt_source_mode(self):
         self.inst.write_inst(":SOUR:FUNC VOLT")
         print('Set voltage as source')
