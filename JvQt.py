@@ -15,3 +15,7 @@ if __name__ == '__main__':
 
    # def __init__(self, *args, **kwargs):
    #     super(Ui_MainWindow, self).__init__(*args, **kwargs)
+"""
+cd Documents\JvQt\SOLEIL_JvQt
+python -m PyQt5.uic.pyuic -x SOLEIL_JvQt.ui -o JvQtUI.py
+"""
