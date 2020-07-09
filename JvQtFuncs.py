@@ -5,8 +5,10 @@ from JvQtUI import Ui_MainWindow
 from datetime import datetime
 import warnings, visa
 import Connection
+# import savewrite
+# import serial2marlin
 
-from random import uniform
+from random import uniform #just since hardware connections not etablished
 
 """
 ==========GOALS============
@@ -50,13 +52,60 @@ class Func_MainWindow():
         self.list_connected_devices()
 
         # Save directory
+        # self.fillallentries = True
 
-        # Connection panel - buttons
+        # Initialization panel - buttons
         self.ui.pushButton_connect.clicked.connect(self.connect_btn)
+        self.ui.pushButton_shutter.clicked.connect(self.shutter_btn)
         self.ui.pushButton_selectDir.clicked.connect(self.select_folder_btn)
         self.ui.pushButton_checkIsc.clicked.connect(self.check_solo_Isc_btn)
+        self.ui.pushButton_checkVoc.clicked.connect(self.check_solo_Voc_btn)
+        self.ui.pushButton_checkallIsc.clicked.connect(self.check_all_Isc_btn)
+        self.ui.pushButton_checkallVoc.clicked.connect(self.check_all_Voc_btn)
         self.ui.pushButton_clear_outputwindow.clicked.connect(lambda: self.clear_message(self.msg_dict['msg']))
-# Hitting the "Connect Button
+
+        # Automation panel - constants
+        self.number_of_cells = 30
+
+        # Automation panel - buttons
+        self.ui.pushButton_selectall.clicked.connect(lambda: self.selectall(True))
+        self.ui.pushButton_deselectall.clicked.connect(lambda: self.selectall(False))
+
+        for i in range(self.number_of_cells):
+            cell_label_auto = 'pushButton_cell1_' + str(i+1)  
+            button = getattr(self.ui, cell_label_auto)
+            button.setCheckable(True)
+
+
+############################
+##   Output window text   ##
+############################
+
+    def append_message(self, msg):
+        self.msg_dict['msg'] += msg + '\n'
+
+    def autoScroll(self):
+        vsb = self.ui.output_window.verticalScrollBar()
+        if vsb.value() <= vsb.maximum():
+            vsb.setValue(vsb.value() + 2)# ERROR!!!
+
+    def output_text(self, str):
+        self.append_message(str)
+        self.ui.output_window.setText(self.msg_dict['msg'])
+
+    def clear_message(self, msg):
+        self.msg_dict['msg'] = ''
+        self.ui.output_window.setText(self.msg_dict['msg'])
+        #self.autoScroll()
+
+#======================================================================================================================================
+#   Initialization (Page 1 of 5)
+#======================================================================================================================================
+
+############################
+## Hardware Connections   ##
+############################
+
     def connect_btn(self):
         now = datetime.now() # Displays the time the connect button was pressed
         current_time = now.strftime('%H:%M:%S')
@@ -74,6 +123,7 @@ class Func_MainWindow():
             self.ui.pushButton_connect.setStyleSheet('background-color: #a1d99b') # green
             self.ui.pushButton_connect.setText('Connected')
 
+            msg += '\n Connecting light shutter \n -----------------------------'
             # print('\n Connecting light shutter \n -----------------------------')
             # TODO: incorporate or call light shutter function
 
@@ -85,13 +135,42 @@ class Func_MainWindow():
             self.ui.pushButton_connect.setText('Disconnected')
             msg += '\nKeithley connection fail\n'
 
-        self.append_message(msg)
-        self.ui.output_window.setText(self.msg_dict['msg'])
+        self.output_text(msg)
 
-    def connect_keithley(self):
+    def shutter_btn(self):
+
+        msg = 'Connecting solar sim shutter \n ----------------------------- \n'
+
+        self.update_shutter_param() # Gathers all of the parameters from function
+        for k, v in self.connection_dict['shutter_parm'].items(): msg += k + ': ' + str(v) + '\n'
+
+        if self.connect_shutter() == 1:
+            msg += '\nShutter connection success'
+            self.ui.pushButton_shutter.setStyleSheet('background-color: #a1d99b') # green
+            self.ui.pushButton_shutter.setText('Connected')
+            self.ui.label_cntStatus.setText('On')
+
+        else:
+            self.ui.pushButton_shutter.setStyleSheet('background-color: #cb181d') #red
+            self.ui.pushButton_shutter.setText('Disconnected')
+            self.ui.label_cntStatus.setText('Off')
+            msg += '\nShutter connection fail\n'
+
+        self.output_text(msg)
+
+
+    def connect_keithley(self): # Checks the connection between the keithley
         self.connection_dict['keithley_parm']['connection'] = Connection.Connect()
         try:
             keithley_rs.keithley_cnt(self.connection_dict['rm'],self.connection_dict['keithley_parm']['COM'])
+            return 1
+        except:
+            return -1
+
+    def connect_shutter(self): # Checks the connection between the shutter
+        self.connection_dict['shutter_parm']['connection'] = Connection.Connect() # Fills the dictionary 
+        try:
+            shutter_rs.shutter_cnt(self.connection_dict['rm'],self.connection_dict['shutter_parm']['COM'])
             return 1
         except:
             return -1
@@ -117,30 +196,26 @@ class Func_MainWindow():
         for parm_, val_ in zip(parm_list, parm_val):
             self.connection_dict['keithley_parm'][parm_] = val_
 
+    def update_shutter_param(self):
+        # Gather information from the initialization panel corresponding to shutter
+        com_val = self.ui.lineEdit_shutterCOM.text()
+        chbox_val = self.ui.checkBox_lightShutter.isChecked()
+
+        parm_list = ['COM', 'chbx_state']
+        parm_val = [com_val, chbox_val]
+        for parm_, val_ in zip(parm_list, parm_val):
+            self.connection_dict['shutter_parm'][parm_] = val_
+
     def list_connected_devices(self):
         rm_list = self.rm.list_resources()
         msg = ''
         for r_ in rm_list:
             msg += r_ + '\n'
-        self.append_message(msg)
-        self.ui.output_window.setText(self.msg_dict['msg'])
+        self.output_text(msg)
 
-    def append_message(self, msg):
-        self.msg_dict['msg'] += msg + '\n'
-
-    def clear_message(self, msg):
-        self.msg_dict['msg'] = ''
-        self.ui.output_window.setText(self.msg_dict['msg'])
-
-    def autoScroll(self):
-        vsb = self.ui.output_window.verticalScrollBar()
-        if vsb.value() <= vsb.maximum():
-            vsb.setValue(vsb.value() + 2)# ERROR!!!
-
-    def output_text(self, str):
-        self.append_message(str)
-        self.ui.output_window.setText(self.msg_dict['msg'])
-        #self.autoScroll()
+############################
+##    Saving Process      ##
+############################
 
     def select_folder_btn(self):
         input_dir = QFileDialog.getExistingDirectory(None, caption = 'Select a folder:', options = QFileDialog.ShowDirsOnly)
@@ -159,18 +234,86 @@ class Func_MainWindow():
         msg = '\nFilename: ' + filename + '\n' # saves individual file for each device...
         self.append_message(msg)
         self.ui.output_window.setText(self.msg_dict['msg'])
-        # filepath = os.path.join(savedir, filename)
+        self.savepath = os.path.join(savedir, filename)
 
-        # IS RETURN NECCESSARY?
-        # return filepath
+    # def create_save_txt(self): 
+    def WriteHeader(filename, header):
+        savefile = open(filename, 'r')
+        # remove any matching 'header' from the file, in case ther are duplicate header rows in the wrong places
+        lines = [line for line in file if not line == header]
+        file.close()
+
+        # rewrite the file, appending the header to row 1
+        file = open(filename, w)
+        file.write(''.join([line for line in lines].insert(0,header)))    
+        file.close()
+    
+############################
+##   Isc and Voc Check    ##
+############################
+
+    def get_Isc(self): # Will need pixel number as an input
+        value = uniform(0, .0015)
+        return value
+
+    def get_Voc(self):# Will need pixel number as an input
+        value = uniform(0, 1.2)
+        return value
 
     def check_solo_Isc_btn(self):
-        value = uniform(0, .0015)
+        value = self.get_Isc()
         self.ui.label_checkedIsc.setText(str(round(value,4)))
         msg = 'Isc: ' + str(value) + '\n'
         self.output_text(msg)
 
-    # def create_save_txt(self): 
+    def check_solo_Voc_btn(self):
+        value = self.get_Voc()
+        self.ui.label_checkedVoc.setText(str(round(value,4)))
+        msg = 'Voc: ' + str(value) + '\n'
+        self.output_text(msg)
+
+    def check_all_Isc_btn(self):
+        nop = 6 # number of pixels on multiplexer board
+        pixel_list_int = [x+1 for x in list(range(nop))] # Creates a list [1,2,3,4,5,6]
+        pixel_list_str = ['label_pixel'+str(i)+'_Isc' for i in pixel_list_int] # newlist = ['label_pixel1_Isc', 'label_pixel2_Isc',...]
+        pixels = self.pixelselected() # Calls other function to retrieve Bool list which checkbox_pixels were selected [True, True, True, False, ...]
+        for i in pixel_list_int:
+            if pixels[i-1] == True:
+                value = self.get_Isc()
+                textbox = getattr(self.ui, pixel_list_str[i-1])
+                textbox.setText(str(round(value,4)))
+                msg = pixel_list_str[i-1][6:] + ' : ' + str(value) + '\n'
+                self.output_text(msg)
+
+    def check_all_Voc_btn(self):
+        nop = 6 # number of pixels on multiplexer board
+        pixel_list_int = [x+1 for x in list(range(nop))] # Creates a list [1,2,3,4,5,6]
+        pixel_list_str = ['label_pixel'+str(i)+'_Voc' for i in pixel_list_int] # newlist = ['label_pixel1_Isc', 'label_pixel2_Isc',...]
+        pixels = self.pixelselected() # Calls other function to retrieve Bool list which checkbox_pixels were selected [True, True, True, False, ...]
+        for i in pixel_list_int:
+            if pixels[i-1] == True:
+                value = self.get_Voc()
+                textbox = getattr(self.ui, pixel_list_str[i-1])
+                textbox.setText(str(round(value,4)))
+                msg = pixel_list_str[i-1][6:] + ' : ' + str(value) + '\n'
+                self.output_text(msg)
+
+    def pixelselected(self):
+        chbox_val1 = self.ui.checkBox_pixel1.isChecked()
+        chbox_val2 = self.ui.checkBox_pixel2.isChecked()
+        chbox_val3 = self.ui.checkBox_pixel3.isChecked()
+        chbox_val4 = self.ui.checkBox_pixel4.isChecked()
+        chbox_val5 = self.ui.checkBox_pixel5.isChecked()
+        chbox_val6 = self.ui.checkBox_pixel6.isChecked()
+        selectedpixels = [chbox_val1, chbox_val2, chbox_val3, chbox_val4, chbox_val5, chbox_val6]
+        return selectedpixels 
+
+############################
+## Populating Pixel Info  ##
+############################
+    
+    # Either set to have all boxes populate when typed in the first one, or have every pixel greyed out so only the first column matters.
+
 
     # def cnt_keithley(self):
     #     if self.ui.checkBox_Keithley.isClicked:
@@ -181,3 +324,30 @@ class Func_MainWindow():
     #
     #
     # def cnt_pixelSwitch(self):
+
+#======================================================================================================================================
+#   JV Automator (Page 3 of 5)
+#======================================================================================================================================
+    def profilesettings(self):
+        t = 5
+
+    def jvprofile(self, number_of_cells):
+        for i in number_of_cells:
+            self.ui.pushButton_connect.setStyleSheet('background-color: #cb181d') #red
+
+    def selectall(self, Bool):
+        for i in range(self.number_of_cells):
+            cell_label_auto = 'pushButton_cell1_' + str(i+1)  
+            button = getattr(self.ui, cell_label_auto)
+            button.setChecked(Bool)
+
+    #         # method called by button 
+    # def changeColor(self): 
+    #     # if button is checked 
+    #     if self.button.isChecked(): 
+    #         # setting background color to light-blue 
+    #         self.button.setStyleSheet("background-color : lightblue") 
+    #     # if it is unchecked 
+    #     else: 
+    #         # set background color back to light-grey 
+    #         self.button.setStyleSheet("background-color : lightgrey") 

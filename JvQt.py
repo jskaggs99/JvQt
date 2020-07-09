@@ -12,7 +12,6 @@ def main():
 if __name__ == '__main__':
    main()
 
-
    # def __init__(self, *args, **kwargs):
    #     super(Ui_MainWindow, self).__init__(*args, **kwargs)
 """
