@@ -30,7 +30,7 @@
      <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -369,76 +369,93 @@
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="2" column="4">
-           <widget class="QLabel" name="label_pixel4_Voc">
-            <property name="text">
-             <string>1.1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Architecture</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_pixel1arc">
+          <item row="5" column="5">
+           <widget class="QLineEdit" name="lineEdit_pixel5opr">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>20</height>
              </size>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_checkallVoc">
+            <property name="text">
+             <string>Check Voc (V)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="6">
+           <widget class="QLineEdit" name="lineEdit_pixel6cmt">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_pixel1_Voc">
+            <property name="text">
+             <string>1.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="label_pixel2_Voc">
+            <property name="text">
+             <string>1.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="lineEdit_pixel4arc">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="label_pixel4_Isc">
+            <property name="text">
+             <string>0.0015</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_pixel2_Isc">
+            <property name="text">
+             <string>0.0015</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLineEdit" name="lineEdit_pixel3chem">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBox_pixel1">
+            <property name="text">
+             <string>Pixel 1</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item row="4" column="2">
            <widget class="QLineEdit" name="lineEdit_pixel2arc">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="6">
-           <widget class="QLabel" name="label_pixel6_Voc">
-            <property name="text">
-             <string>1.1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="5">
-           <widget class="QLineEdit" name="lineEdit_pixel5cmt">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="5">
-           <widget class="QLineEdit" name="lineEdit_pixel5arc">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Comments</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="4">
-           <widget class="QLineEdit" name="lineEdit_pixel4cmt">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -457,22 +474,45 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="6">
-           <widget class="QLabel" name="label_pixel6_Isc">
-            <property name="text">
-             <string>0.0015</string>
+          <item row="6" column="3">
+           <widget class="QLineEdit" name="lineEdit_pixel3cmt">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="pushButton_checkallVoc">
-            <property name="text">
-             <string>Check Voc (V)</string>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEdit_pixel1chem">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
            </widget>
           </item>
-          <item row="5" column="5">
-           <widget class="QLineEdit" name="lineEdit_pixel5opr">
+          <item row="5" column="6">
+           <widget class="QLineEdit" name="lineEdit_pixel6opr">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QCheckBox" name="checkBox_pixel6">
+            <property name="text">
+             <string>Pixel 6</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEdit_pixel1arc">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -491,15 +531,8 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="5">
-           <widget class="QLabel" name="label_pixel5_Voc">
-            <property name="text">
-             <string>1.1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="6">
-           <widget class="QLineEdit" name="lineEdit_pixel6opr">
+          <item row="6" column="2">
+           <widget class="QLineEdit" name="lineEdit_pixel2cmt">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -508,103 +541,15 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="4">
-           <widget class="QLineEdit" name="lineEdit_pixel4arc">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_pixel2_Isc">
+          <item row="1" column="5">
+           <widget class="QLabel" name="label_pixel5_Isc">
             <property name="text">
              <string>0.0015</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>Operator</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_pixel1_Isc">
-            <property name="text">
-             <string>0.0015</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QLabel" name="label_pixel3_Voc">
-            <property name="text">
-             <string>1.1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLineEdit" name="lineEdit_pixel2chem">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3">
-           <widget class="QLineEdit" name="lineEdit_pixel3arc">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="6">
-           <widget class="QLineEdit" name="lineEdit_pixel6chem">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLineEdit" name="lineEdit_pixel3chem">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="6">
-           <widget class="QLineEdit" name="lineEdit_pixel6cmt">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="label_pixel2_Voc">
-            <property name="text">
-             <string>1.1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="4">
-           <widget class="QLineEdit" name="lineEdit_pixel4opr">
+          <item row="5" column="3">
+           <widget class="QLineEdit" name="lineEdit_pixel3opr">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -623,8 +568,15 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="2">
-           <widget class="QLineEdit" name="lineEdit_pixel2cmt">
+          <item row="2" column="6">
+           <widget class="QLabel" name="label_pixel6_Voc">
+            <property name="text">
+             <string>1.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QLineEdit" name="lineEdit_pixel4chem">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -633,10 +585,153 @@
             </property>
            </widget>
           </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Architecture</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLineEdit" name="lineEdit_pixel3arc">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLabel" name="label_pixel6_Isc">
+            <property name="text">
+             <string>0.0015</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLineEdit" name="lineEdit_pixel2chem">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="5">
+           <widget class="QLineEdit" name="lineEdit_pixel5arc">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLabel" name="label_pixel5_Voc">
+            <property name="text">
+             <string>1.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QLabel" name="label_pixel4_Voc">
+            <property name="text">
+             <string>1.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Operator</string>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_3">
             <property name="text">
              <string>Chemistry</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QCheckBox" name="checkBox_pixel5">
+            <property name="text">
+             <string>Pixel 5</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="checkBox_pixel2">
+            <property name="text">
+             <string>Pixel 2</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="4">
+           <widget class="QLineEdit" name="lineEdit_pixel4cmt">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Comments</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="label_pixel3_Voc">
+            <property name="text">
+             <string>1.1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLineEdit" name="lineEdit_pixel4opr">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="5">
+           <widget class="QLineEdit" name="lineEdit_pixel5cmt">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Pixel Number</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="checkBox_pixel3">
+            <property name="text">
+             <string>Pixel 3</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -657,13 +752,13 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_pixel1chem">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
+          <item row="0" column="4">
+           <widget class="QCheckBox" name="checkBox_pixel4">
+            <property name="text">
+             <string>Pixel 4</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -674,37 +769,13 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="3">
-           <widget class="QLineEdit" name="lineEdit_pixel3cmt">
+          <item row="3" column="6">
+           <widget class="QLineEdit" name="lineEdit_pixel6chem">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>20</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_pixel1_Voc">
-            <property name="text">
-             <string>1.1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="4">
-           <widget class="QLineEdit" name="lineEdit_pixel4chem">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5">
-           <widget class="QLabel" name="label_pixel5_Isc">
-            <property name="text">
-             <string>0.0015</string>
             </property>
            </widget>
           </item>
@@ -718,81 +789,17 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="4">
-           <widget class="QLabel" name="label_pixel4_Isc">
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_pixel1_Isc">
             <property name="text">
              <string>0.0015</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="3">
-           <widget class="QLineEdit" name="lineEdit_pixel3opr">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_2">
+          <item row="3" column="7" rowspan="4">
+           <widget class="QPushButton" name="pushButton_fill">
             <property name="text">
-             <string>Pixel Number</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="checkBox_pixel1">
-            <property name="text">
-             <string>Pixel 1</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QCheckBox" name="checkBox_pixel2">
-            <property name="text">
-             <string>Pixel 2</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QCheckBox" name="checkBox_pixel3">
-            <property name="text">
-             <string>Pixel 3</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="4">
-           <widget class="QCheckBox" name="checkBox_pixel4">
-            <property name="text">
-             <string>Pixel 4</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QCheckBox" name="checkBox_pixel5">
-            <property name="text">
-             <string>Pixel 5</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="6">
-           <widget class="QCheckBox" name="checkBox_pixel6">
-            <property name="text">
-             <string>Pixel 6</string>
+             <string>Fill</string>
             </property>
            </widget>
           </item>
@@ -2309,19 +2316,6 @@
         <string>Home (G28)</string>
        </property>
       </widget>
-      <widget class="QCommandLinkButton" name="commandLinkButton_connectmarlin">
-       <property name="geometry">
-        <rect>
-         <x>770</x>
-         <y>20</y>
-         <width>168</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Connect to Marlin</string>
-       </property>
-      </widget>
       <widget class="QTextEdit" name="textEdit_manualgcode">
        <property name="geometry">
         <rect>
@@ -2369,6 +2363,45 @@
        </property>
        <property name="text">
         <string>Send</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_flushbuffer">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Flush Buffer</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_connectMarlin">
+       <property name="geometry">
+        <rect>
+         <x>750</x>
+         <y>20</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Establish serial connection</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_closeMarlin">
+       <property name="geometry">
+        <rect>
+         <x>750</x>
+         <y>60</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Close serial connection</string>
        </property>
       </widget>
      </widget>
@@ -2446,6 +2479,19 @@
        </property>
        <property name="text">
         <string>Deselect All</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_Apply">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>111</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Apply</string>
        </property>
       </widget>
      </widget>
@@ -3137,7 +3183,7 @@
      </size>
     </property>
     <property name="text">
-     <string>v_2_Dev</string>
+     <string>v_3_Dev</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

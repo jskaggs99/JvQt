@@ -28,6 +28,9 @@ y0: bottom left corner of the bottom left cell
 		self.Voltage = None
 		self.CurrentDensity = None
 
+		# Physical tray triggers
+		self.homed = False
+
 		# Physical tray parameters and profiles
 		if self.profile == 'full30tray':
 			self.x0 = 10 #x position of corner cell, mm
@@ -51,16 +54,10 @@ y0: bottom left corner of the bottom left cell
 			print('Need to select a tray profile or initialize one in the code (movement.py)')
 			# Can i get this to send to the output window of the gui?
 
-	def homestage()
-		s2m.send2marlin(G28)
-
-	def automated_JV(profile)
+	def automated_JV(self):
 		# Define the profile here. default is scan cells 1 through 25/30. 
+		if self.profile == 
 		x = 0
-
-	def move_to(x,y):
-		s2m.send2marlin('G0X'+ str(x))
-		s2m.send2marlin('G0Y'+ str(y))
 
 	def measure_JV(vmin, vmax, pts, rate):
 		# Set up the jv sweep variables
@@ -77,8 +74,9 @@ y0: bottom left corner of the bottom left cell
 	 	# Proceed with measurements of each pixel
 	 	for p_ in pixel_index:
 	 		pixelswitch_cnt.Pixelswitch.turn_on_pixel(pixelval=p_)  # turn on pixel p_
-	  		self.Voltage[p_], self.CurrentDensity[p_] = take_measurement(vmeas, jmeas)
-	    return vmeas, jmeas
+	  		self.CurrentDensity[p_] = take_measurement(vmeas, jmeas) # store the measurement into the dictionary
+	  		self.Voltage[p_] = vmeas
+	    # return vmeas, jmeas
 
 	  # light_off() # fake function
 	  	shutter_cnt.Shutter.shutter_close()
@@ -98,17 +96,3 @@ y0: bottom left corner of the bottom left cell
 	 	for v in vmeas:
 	    		jmeas.append(keithley_cnt.Keithley.inst_set_source_volt_value(voltage=v_))
 	    return jmeas
-
-	 # 	s2m.zprobe.lower_zstamp() # fake function, part of the zstamp class?
-	 # 	# after this, contact should be made and a key passed in order to tell the system that connection has been made. 
-	 # 	voltage_arr = np.linspace(vmin,vmax,pts)   # voltage array
-	 # 	pixel_index = np.arange(1,4) # np.arange(1,7) -> [1,2,3,4,5,6]
-	 # 	current_arr = [[]] # arraneg 
-	 # 	shutter_cnt.Shutter.shutter_open()
-	 # 	for p_ in pixel_index:
-  #   		pixelswitch_cnt.Pixelswitch.turn_on_pixel(pixelval=p_)  # turn on pixel p_
-  #   		for v_ in voltage_arr:
-        		
-  #       shutter_cnt.Shutter.shutter_close()
-		# pixelswitch_cnt.Pixelswitch.turn_off_all()
-		# keithley_cnt.Keithley.inst_output_off()

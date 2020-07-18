@@ -1,6 +1,7 @@
 # savewrite
 
 # CSV FILE JV OUTPUT
+# ALSO CREATE A .JSON FILE
 
 import csv
 #import pandas

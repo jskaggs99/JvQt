@@ -6,38 +6,73 @@ Will take care of sending G-code through serial to Marlin.
 import serial
 import time
 
-time.sleep(2)
+class SerialConnect():
+	
+	def __init__(self, COM = 'COM5', baudrate = 115200):
+		self.COM = COM
+		self.baudrate = baudrate
+		self.serial_handle = None
 
+	def openserial(self, COM = 'COM5', baudrate = 115200):
+		#Establishes a serial communication between the driverboard.
+		ser = serial.Serial(COM, baudrate)
+		ser.write(b'\n\n')
+		time.sleep(1)
+		self.serial_handle = ser
+		return ser
 
+	def closeserial(self):
+		self.serial_handle.close()
 
-def send2marlin(text COM = 'COM6', baudrate = 115200, *args, **kwargs):
-	""" 
-	Sends G-Code as an input into Marlin. Removes the need for pronterface.
-	"""
-	# try:
-	# 	
-	# 	continue
-	# except
-	# 	
-	ser = serial.Serial(COM, baudrate) 
-	ser.write(b'' + text + '\n')
-	# ser.write(b'G28 X0\n') # My second issue comes up when I'm not sure of the line ending character that the M2 expects (maybe \n, \r or even \r\n)
-	ser.close()
+	def send2marlin(self, text, COM = 'COM6', baudrate = 115200, *args, **kwargs):
+		""" 
+		Sends G-Code as an input into Marlin. Removes the need for pronterface.
+		"""
+		ser = self.serial_handle
+		text = text + '\n'
+		print(text)
+		text = str.encode(text) # encodes it into bytes
 
+		ser.write(b'\n\n') # wakes up the serial port
+		time.sleep(1)
+		ser.write(text)
+		time.sleep(1)
+		# ser.write(b'G28 X0\n') # My second issue comes up when I'm not sure of the line ending character that the M2 expects (maybe \n, \r or even \r\n)
+		
+	def manualgcodesender():
+		#Probably useless
+		x=1
+
+	def flushbuffer(self):
+		self.serial_handle.reset_input_buffer()
 
 class xystage():
-	connection_dict = {'xstepper': {'COM': 'ASRL3::INSTR', 'connection':None, 'movementhistory': None, 'homed': False}
-                       'ystepper': {'COM': 'ASRL3::INSTR', 'connection':None, 'movementhistory': None, 'homed': False},
+	connection_dict = {'xstepper': {'COM': 'ASRL3::INSTR', 'connection':None, 'movementhistory': None, 'homed': False},
+                       'ystepper': {'COM': 'ASRL3::INSTR', 'connection':None, 'movementhistory': None, 'homed': False}
 						}
+	def move_to(self, x,y):
+		#check to see if x and y are both given. 
+		# s2m.send2marlin()
+		s2m.send2marlin('G0 X'+ str(x))
+		s2m.send2marlin('G0 Y'+ str(y))
+
+	def homestage(self):
+		s2m.send2marlin(G28)
+		self.homed = true
 
 class zprobe():
+	connection_dict = {'zstepper': {'COM': 'ASRL3::INSTR', 'connection':None, 'movementhistory': None, 'homed': False}
+						}
+	def move_to(self, z):
+		s2m.send2marlin('G0Z'+ str(z))
 
-	def lift_down():
+	def lift_down(self):
 		send2marlin(G0Z5)
-		
+	
+	def homestage(self):
+		s2m.send2marlin(G28)
+		self.homed = true
 
-
-def manualgcodesender():
 
 	# #!/usr/bin/python
 	# """\

@@ -3,10 +3,12 @@ from PyQt5 import QtWidgets, QtCore, QtGui, uic
 from JvQtFuncs import Func_MainWindow
 
 def main():
+	
     app = QtWidgets.QApplication(sys.argv)
     gui = Func_MainWindow()
     gui.window.show()
     sys.exit(app.exec_())
+
 
 
 if __name__ == '__main__':
